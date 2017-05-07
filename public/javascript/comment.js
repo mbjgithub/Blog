@@ -41,6 +41,7 @@ $(function(){
         url:'/comments',
         data:{_id:_id},
         success:function(data,resText,JQXHR){
+            console.log(data)
             if(data.err){
                 parent.text(data.err)
             }else if(data.tips){

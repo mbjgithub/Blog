@@ -4,7 +4,7 @@ var ArticleModel=require('../models/article')
 var app=express.Router()
 
 app.post('/comments',function(req,res){
-   ArticleModel.find({_id:req.body._id},function(err,article){
+   ArticleModel.findOne({_id:req.body._id},function(err,article){
          if(err||article==undefined){
          	res.json({err:'连接数据库出错,请检查你的网络'})
          	return
@@ -14,6 +14,7 @@ app.post('/comments',function(req,res){
          	res.json({tips:'暂时没有评论，快来抢沙发吧'})
          }else{
          	formateComments(comments)
+            console.log(comments)        //这里也好奇怪，明明是对象，我在formateComments里面添加了属性，结果没有添加
          	res.json({comments:comments})
          }
    })
