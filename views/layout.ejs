@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%=title  %></title>
+  <link rel="stylesheet" type="text/css" href="/css/layout.css">
+  <link rel="Shortcut Icon" href="/images/favicon.ico">
+  <script type="text/javascript" rel="stylesheet" src="/javascript/jquery-1.12.2.js"></script>
+  <script type="text/javascript" rel="stylesheet" src="/javascript/public.js"></script>
+  <script type="text/javascript" rel="stylesheet" src="/javascript/layout.js"></script>
+</head>
+<body>
+ <div class="top-nav">
+  <div class="top-nav-center">
+
+   <div class="top-nav-center-profile">
+     <% if(user){ %>
+      <a href="/mainpage" class="top-nav-center-profile-mainpage">
+       <% if(user.img){ %>
+       <img src='<%= user.img %>' />
+       <% }else{ %>
+       <img src='/images/publicHeader.png' />
+       <% } %>
+       <span><%= user.username %></span>
+      </a>
+     <% }else{ %>
+     <span class="loginorregister">
+      <a href="/loginorregister/login"><span>登陆</span></a>
+     <a href="/loginorregister/register"><span>注册</span></a>
+     </span>
+    <% } %>
+    <div class="profile-div">
+    <ul class="profile-ul">
+     <li><a href="/mainpage"><span class="sprite-mainpage"></span>我的主页</a></li>
+     <li><a href="/personalMsg"><span class="sprite-personalMsg"></span>私信</a></li>
+     <li><a href="/setting"><span class="sprite-setting"></span>设置</a></li>
+     <li><a href="/exit"><span class="sprite-exit"></span>退出</a></li>
+    </ul>
+    </div>
+   </div>
+
+   <a class="top-nav-center-publish-article" href="/editorArticle">发博文</a>
+   <a href="/shouye" class="top-nav-center-search-a"><span class="top-nav-center-search-span"></span></a>
+   <div class="top-nav-center-search">
+    <form class="top-nav-center-search-form">
+     <input type="text" name="search" value="" class="top-nav-center-search-input" placeholder="请输入...">
+     <button class="top-nav-center-search-button">
+     <span class="top-nav-center-search-button-span"></span>
+     </button>
+    </form>
+    <div class="top-nav-center-search-result" style="display:none;">
+     <p>标签</p>
+     <ul class="top-nav-center-search-result-tags">
+      
+     </ul>
+     <p>作者</p>
+     <ul class="top-nav-center-search-result-authors">
+      
+     </ul>
+     <p>文章</p>
+     <ul class="top-nav-center-search-result-articles">
+      
+     </ul>
+    </div>
+   </div>
+   
+   <div class="top-nav-center-menu">
+    <ul>
+     <li><a href="/index">首页</a></li>
+     <li><a href="/topic">话题</a></li>
+     <li><a href="/explore">发现</a></li>
+     <li><a href="/message">消息</a></li>
+    </ul>
+   </div>
+
+  </div>
+ </div>
+
+ <div class="middle">
+  <div class="middle-center">
+   <%- body -%>     
+  </div>
+ </div>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<% layout("emptyLayout") %>
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>博客--写文章</title>
+  <link type="text/css" rel="stylesheet" href="/css/editorArticle.css">
+  <script type="text/javascript" rel="stylesheet" src="/javascript/jquery-1.12.2.js"></script>
+  <script type="text/javascript" rel="stylesheet" src="/javascript/jquery-form.js"></script>
+  <script type="text/javascript" rel="stylesheet" src="/javascript/editorArticleBasic.js"></script>
+  <script type="text/javascript" rel="stylesheet" src="/javascript/editorArticleEditor.js"></script>
+ </head>
+ <body>
+  <div class="header">
+   <div class="header-center">
+    <img class="header-center-img" src="/images/bigLogo.png" />
+    <span class="header-center-span">Write More,Speak Less</span>
+   </div>
+  </div>
+  <div class="main">
+   <div class="center">
+    <form class="mainForm" enctype="multipart/form-data" method="POST" action="/submitArticle">
+     <div class="titleBlock">
+      <div class="titleImg"><img class="uploadImg" src="/images/articleHeader.png" /></div>
+      <input type="file" name="uploadFile" class="uploadFile">
+      <div class="title" contenteditable="true">
+       <span class="titlePlaceHolder">请输入文章标题</span>
+      </div>
+      <input type="hidden" name="realTitle">
+     </div>
+     <div class="toolLine">
+      <div class="firstBold firstCommon" title="粗体">
+       <div class="secondBold secondCommon"></div>
+      </div>
+      <div class="firstItalic firstCommon" title="斜体">
+       <div class="secondItalic secondCommon"></div>
+      </div>
+      <div class="firstUnderline firstCommon" title="下划线">
+       <div class="secondUnderline secondCommon"></div>
+      </div>
+      <div unselectable="on" class="firstImg firstCommon" title="插入图片">
+       <div class="secondImg secondCommon"></div>
+      </div>
+      <div unselectable="on" class="firstCode firstCommon" title="代码">
+       <div class="secondCode secondCommon"></div>
+      </div>
+      <div class="firstOl firstCommon" title="有序列表">
+       <div class="secondOl secondCommon"></div>
+      </div>
+      <div class="firstUl firstCommon" title="无序列表">
+       <div class="secondUl secondCommon"></div>
+      </div>
+     </div>
+    <div class="contentBlock">
+      <input type="hidden" name="realContent">
+      <!-- <div class="content" contenteditable="true">
+       <span class="contentPlaceHolder">请输入文章内容</span>
+      </div>
+      <input type="hidden" name="realContent">
+      <iframe frameborder="0" class="content"></iframe> -->
+      
+     </div> 
+     <!-- <div id="richEditor" style="width: 600px; border: 1px solid #000000;"> -->
+     <div class="article-tags">
+      <div class="article-tags-tips-sprites"><span class="article-tags-tips">添加博文标签</span>
+      <span class="article-tags-expand"></span></div>
+      <div class="article-tags-contentDiv">
+       <!-- <input type="text" name="articleTags" class="article-tags-contentInput" placeholder="标签间请用“空格”或“逗号”隔开，最多可添加5个标签"> -->
+       <div class="article-tags-contentInputDiv">
+        <input type="hidden" name="articleTagsSubmit" class="article-tags-submit" value="">
+        <em>标签间请用“空格”或“逗号”隔开，最多可添加5个标签</em>
+        <input type="text" name="realTags" maxlength="10" class="article-tags-contentInput">
+       </div>
+      </div>
+      <div class="recommend-tags">
+       <div class="recommend-tags-div"><span class="recommend-t  ags-tips">推荐标签</span></div>
+       <div class="recommend-tags-tips-div"> 
+        <ul class="recommend-tags-tips-ul">
+         <li>育儿</li>
+         <li>娱乐</li>
+         <li>星座</li>
+         <li>文化</li>
+         <li>体育</li>
+         <li>时尚</li>
+         <li>情感</li>
+         <li>汽车</li>
+         <li>美食</li>
+         <li>旅游</li>
+         <li>军事</li>
+         <li>教育</li>
+         <li>健康</li>
+         <li>股票</li>
+         <li>房产</li>
+         <li>财经</li>
+         <li>历史</li>
+         <li>收藏</li>
+         <li>时评</li>
+         <li>佛学</li>
+         <li>图片</li>
+         <li>IT</li>
+         <li>编程</li>
+         <li>学习</li>
+        </ul>
+       </div>
+      </div>
+     </div>
+     <div class="atricle-comment">
+      <div class="article-allow-comment article-allow-common">
+       <span class="article-allow-comment-words atricle-comment-common words">允许评论</span>
+       <div class="article-allow-comment-div atricle-comment-common divs"><span class="article-allow-common-sprites"></span></div>
+       <input type="hidden" name="allowComment" value="1">
+      </div>
+      <div class="article-allow-nobody article-allow-common">
+       <span class="article-allow-nobody-words atricle-comment-common words">仅自己可见</span>
+       <div class="article-allow-nobody-div atricle-comment-common divs"><span></span></div>
+       <input type="hidden" name="allowNobody" value="0">
+      </div>
+      <div class="article-allow-others article-allow-common">
+       <span class="article-allow-others-words atricle-comment-common words">所有人可见</span>
+       <div class="article-allow-others-div atricle-comment-common divs"><span class="article-allow-common-sprites"></span></div>
+       <input type="hidden" name="allwoOthers" value="1">
+      </div>
+     </div>
+     <div class="article-release">
+      <div class="article-release-whole">
+      <span class="article-release-left article-release-common left-right"></span>
+      <span class="article-release-center article-release-common">
+       发博文
+      </span>
+      <span class="article-release-right article-release-common left-right"></span>
+      </div>
+     </div>
+
+    </form>
+   </div>
+    <form class="otherForm" enctype="multipart/form-data" method="POST">
+     <input type="file" name="contentImg" class="contentImg">
+    </form>
+   </div>
+   <div class="footer">
+    <div class="footer-center">
+     <div class="footer-center-first"><a href="/">博客首页</a>&nbsp;不良信息反馈&nbsp;电话：4006900000 提示音后按1键（按当地市话标准计费）&nbsp;欢迎批评指正
+     </div>
+     <div class="footer-center-second">
+      <ul>
+       <li><a href="/blog/simpleIntroduce">博客简介</a>&nbsp;|</li>
+       <li><a href="/blog/aboutBlog">关于博客</a>&nbsp;|</li>
+       <li><a href="/blog/ads">广告服务</a>&nbsp;|</li>
+       <li><a href="/blog/concatUs">联系我们</a>&nbsp;|</li>
+       <li><a href="/blog/employee">招聘信息</a>&nbsp;|</li>
+       <li><a href="/loginorregister/register">会员注册</a>&nbsp;|</li>
+       <li><a href="/blog/produceQA">产品答疑</a>&nbsp;</li>
+      </ul>
+     </div>
+     <div class="footer-center-third">
+      <div class="copyRight-first">Copyright ? 2016-8-1 至 2016-8-8 SINA Corporation, All Rights Reserved</div>
+      <div class="copyRight-second">私人博客 版权所有</div>
+     </div>
+    </div>
+   </div>
+ </body>
+</html>

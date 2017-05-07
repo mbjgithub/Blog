@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="description" content="博客">
+    <meta name="keywords" content="博客,知识共享">
+    <meta name="viewport" content="width=device-width">
+    <title><%= title %></title>
+    <link rel="Shortcut Icon" href="/images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:1337/css/layout.css">
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:1337/css/index.css">
+    
+    <!-- 我要在这里插入css -->
+    <script>
+        // ES5 shim
+        if (!Array.prototype.forEach) {
+            Array.prototype.forEach = function (fn) {
+                var arr = this
+                for (var i =0; i < arr.length; i ++) {
+                    fn(arr[i], i)
+                }
+            }
+        }
+    </script>
+    <script type="text/javascript" src="http://127.0.0.1:1337/javascript/jquery-1.12.2.js"></script>
+    <script type="text/javascript" src="http://127.0.0.1:1337/javascript/real.js"></script>
+</head>
+<body>
+    {% view %}
+    <!-- 我要在这里插入所有的业务代码js -->
+    <!-- inject:body:js -->
+    <!-- endinject -->
+    <script>
+        window.App()
+        window.$j = window.$ || window.jQuery
+    </script>
+</body>
+</html>

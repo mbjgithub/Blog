@@ -1,0 +1,27 @@
+<link rel="stylesheet" type="text/css" href="/css/tags.css">
+<script type="text/javascript" rel="stylesheet" src="/javascript/tags.js"></script>
+<div class="article-right-body article-right-common">
+      <!-- 文章的分类显示 -->
+      <p class="current-tags">当前标签--&gt;<span><%= currentTag %></span></p>
+      <% articles.forEach(function(art){ %>
+       <div class="article-right-body-center-category">
+        <p class="article-right-body-center-title"><%= art.title %></p>
+        <a class="article-right-body-center-a" href="<%= '/articles/'+art._id %>" >
+         <div class="article-right-body-center"></div>
+        </a>
+        <div style="display:none" class="store-content"></div>
+        <script type="text/javascript">
+          var str="<%= art.content %>";
+          convert(str,$(".article-right-body-center").last(),$(".store-content").last());
+          ellipsis($(".article-right-body-center-a").last(),$(".article-right-body-center").last());
+         </script>
+        <div class="article-right-body-center-div">
+         <span><%= art.createFormateDate %></span>
+         <span>阅读(<%= art.visitedNum %>)</span>
+         <span>评论(<%= art.comments.length %>)</span>
+         <span>反对(<%= art.opposeNum %>)</span>
+         <span>赞同(<%= art.praiseNum %>)</span>
+        </div>
+       </div>
+      <% }) %>
+  </div>

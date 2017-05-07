@@ -1,0 +1,439 @@
+<link rel="stylesheet" type="text/css" href="/css/author.css">
+<script type="text/javascript" rel="stylesheet" src="/javascript/jquery-form.js"></script>
+<% if(article.selfFlag=="yes"){ %>
+<script type="text/javascript" rel="stylesheet" src="/javascript/author.js"></script>
+<% } %>
+<script type="text/javascript" rel="stylesheet" src="/javascript/authorArticles.js"></script>
+<div class="left">
+<div class="left-top">
+ <div class="personal-information">
+  <div class="personal-information-left">
+   <img class="personal-information-img" src="<%= author.img %>" />
+  </div>
+  <div class="personal-information-right">
+   <p class="personal-information-right-username"><a href="<%= '/authors/'+author._id %>" class="personal-information-left-a"><%= author.username %></a></p>
+   <div class="personal-information-right-line0 personal-information-right-line-common">
+    <span class="personal-information-right-line0-sprites personal-information-right-line1-sprites-common"></span>
+    <div class="personal-information-right-line0-div">
+      <a class="write-information-a-common" style="display:none;">填写工作信息</a>
+      <div class="job-company-information-div write-personal-information-common" style="display:none;">
+       <input type="text" name="company" placeholder="公司或组织名称">
+       <input type="text" name="job" placeholder="你的职位">
+       <button class="write-information-double-button write-information-sure-button">确定</button>
+      </div>
+     <% if((!author.company)&&(!author.job)){ %>
+      <a class="write-information-a-common">填写工作信息</a>
+      <div class="job-company-information-div write-personal-information-common">
+       <input type="text" name="company" placeholder="公司或组织名称">
+       <input type="text" name="job" placeholder="你的职位">
+       <button class="write-information-double-button write-information-sure-button">确定</button>
+      </div>
+     <% }else{ %>
+     <span class="personal-information-company personal-information-common">
+     <% if(author.company){ %>
+        <span><%= author.company %></span>
+    <% }else{ %>
+         <a class="write-information-a-common">填写公司信息</a>
+         <div class="company-information-div write-personal-information-common">
+          <input type="text" name="company" placeholder="公司或组织名称">
+          <button class="write-information-single-button write-information-sure-button">确定</button>
+         </div>
+    <% } %>
+     </span>
+     <span class="personal-information-job personal-information-common">
+     <% if(author.job){ %>
+        <span><%= author.job %></span>
+    <% }else{ %>
+         <a class="write-information-a-common">填写职位信息</a>
+         <div class="job-information-div write-personal-information-common">
+          <input type="text" name="job" placeholder="你的职位">
+          <button class="write-information-single-button write-information-sure-button">确定</button>
+         </div>
+    <% } %>
+    </span>
+    <% } %>
+    </div>
+    <a class="personal-information-right-line-fix" style="display:none;"><span></span>修改</a>
+   </div>
+
+   <div class="personal-information-right-line1 personal-information-right-line-common">
+    <span class="personal-information-right-line1-sprites personal-information-right-line1-sprites-common"></span>
+    <div class="personal-information-right-line0-div">
+      <a class="write-information-a-common" style="display:none;">填写城市性别信息</a>
+      <div class="job-company-information-div write-personal-information-common" style="display:none;">
+       <input type="text" name="city" placeholder="城市名称">
+       <input type="radio" name="sex" value="男">男
+       <input type="radio" name="sex" value="女">女
+       <button class="write-information-double-button write-information-sure-button">确定</button>
+      </div>
+     <% if((!author.city)&&(!author.sex)){ %>
+      <a class="write-information-a-common">填写城市性别信息</a>
+      <div class="job-company-information-div write-personal-information-common">
+       <input type="text" name="city" placeholder="城市名称">
+       <input type="radio" name="sex" value="男">男
+       <input type="radio" name="sex" value="女">女
+       <button class="write-information-double-button write-information-sure-button">确定</button>
+      </div>
+     <% }else{ %>
+     <span class="personal-information-company personal-information-common">
+     <% if(author.city){ %>
+        <span><%= author.city %></span>
+    <% }else{ %>
+         <a class="write-information-a-common">填写城市信息</a>
+         <div class="company-information-div write-personal-information-common">
+          <input type="text" name="company" placeholder="城市名称">
+          <button class="write-information-single-button write-information-sure-button">确定</button>
+         </div>
+    <% } %>
+     </span>
+     <span class="personal-information-job personal-information-common">
+     <% if(author.sex){ %>
+        <span><%= author.sex %></span>
+    <% }else{ %>
+         <a class="write-information-a-common">填写性别信息</a>
+         <div class="job-information-div write-personal-information-common">
+          <input type="radio" name="sex" value="男">男
+          <input type="radio" name="sex" value="女">女
+          <button class="write-information-single-button write-information-sure-button">确定</button>
+         </div>
+    <% } %>
+    </span>
+    <% } %>
+    </div>
+    <a class="personal-information-right-line-fix" style="display:none;"><span></span>修改</a>
+   </div>
+
+   <div class="personal-information-right-line2 personal-information-right-line-common">
+    <span class="personal-information-right-line2-sprites personal-information-right-line1-sprites-common"></span>
+    <div class="personal-information-right-line0-div">
+      <a class="write-information-a-common" style="display:none;">填写学校专业信息</a>
+      <div class="job-company-information-div write-personal-information-common" style="display:none;">
+       <input type="text" name="school" placeholder="学校名称">
+       <input type="text" name="profession" placeholder="你的专业">
+       <button class="write-information-double-button write-information-sure-button">确定</button>
+      </div>
+     <% if((!author.school)&&(!author.profession)){ %>
+      <a class="write-information-a-common">填写学校专业信息</a>
+      <div class="job-company-information-div write-personal-information-common">
+       <input type="text" name="school" placeholder="学校名称">
+       <input type="text" name="profession" placeholder="你的专业">
+       <button class="write-information-double-button write-information-sure-button">确定</button>
+      </div>
+     <% }else{ %>
+     <span class="personal-information-company personal-information-common">
+     <% if(author.school){ %>
+        <span><%= author.school %></span>
+    <% }else{ %>
+         <a class="write-information-a-common">填写学校信息</a>
+         <div class="company-information-div write-personal-information-common">
+          <input type="text" name="school" placeholder="学校名称">
+          <button class="write-information-single-button write-information-sure-button">确定</button>
+         </div>
+    <% } %>
+     </span>
+     <span class="personal-information-job personal-information-common">
+     <% if(author.profession){ %>
+        <span><%= author.profession %></span>
+    <% }else{ %>
+         <a class="write-information-a-common">填写专业信息</a>
+         <div class="job-information-div write-personal-information-common">
+          <input type="text" name="profession" placeholder="你的专业">
+          <button class="write-information-single-button write-information-sure-button">确定</button>
+         </div>
+    <% } %>
+    </span>
+    <% } %>
+    </div>
+    <a class="personal-information-right-line-fix" style="display:none;"><span></span>修改</a>
+   </div>
+   
+   <div class="personal-information-right-line3 personal-information-right-line-common">
+    <span class="personal-information-right-line3-sprites personal-information-right-line1-sprites-common"></span>
+    <div class="personal-information-right-line0-div">
+     <span class="personal-information-company personal-information-common">
+     <% if(author.expert){ %>
+        <span><%= author.expert %></span>
+    <% }else{ %>
+         <a class="write-information-a-common">填写优势信息</a>
+         <div class="company-information-div write-personal-information-common write-personal-information-common-special">
+          <textarea name="expert" placeholder="你的优势"></textarea>
+          <button class="write-information-single-button write-information-sure-button">确定</button>
+         </div>
+    <% } %>
+         <a class="write-information-a-common" style="display:none;">填写优势信息</a>
+         <div class="company-information-div write-personal-information-common write-personal-information-common-special" style="display:none;">
+          <textarea name="expert" placeholder="你的优势"></textarea>
+          <button class="write-information-single-button write-information-sure-button">确定</button>
+         </div>
+     </span>
+    </div>
+    <a class="personal-information-right-line-fix" style="display:none;"><span></span>修改</a>
+   </div>
+
+   <div class="personal-information-right-line4 personal-information-right-line-common">
+    <span class="personal-information-right-line4-sprites personal-information-right-line1-sprites-common"></span>
+    <div class="personal-information-right-line0-div">
+     <span class="personal-information-company personal-information-common">
+     <% if(author.summary){ %>
+        <span><%= author.summary %></span>
+    <% }else{ %>
+         <a class="write-information-a-common">填写座右铭信息</a>
+         <div class="company-information-div write-personal-information-common write-personal-information-common-special">
+          <textarea name="expert" placeholder="你的座右铭"></textarea>
+          <button class="write-information-single-button write-information-sure-button">确定</button>
+         </div>
+    <% } %>
+         <a class="write-information-a-common" style="display:none;">填写座右铭信息</a>
+         <div class="company-information-div write-personal-information-common write-personal-information-common-special" style="display:none;">
+          <textarea name="expert" placeholder="你的座右铭"></textarea>
+          <button class="write-information-single-button write-information-sure-button">确定</button>
+         </div>
+     </span>
+    </div>
+    <a class="personal-information-right-line-fix" style="display:none;"><span></span>修改</a>
+   </div>
+
+  </div>
+ </div>
+
+ <div class="articles-information">
+  <div class="articles-information-left">
+   <span>赞同(<%= article.totalPraiseNum||"0" %>)&nbsp;&nbsp;</span>
+   <span>反对(<%= article.totalOpposeNum||"0" %>)&nbsp;&nbsp;</span>
+   <span>评论(<%= article.totalCommentsNum||"0" %>)&nbsp;&nbsp;</span>
+   <span>文章(<%= article.totalArticlesNum||"0" %>)&nbsp;&nbsp;</span>
+   <span>访问量(<%= article.totalVisitedNum||"0" %>)</span>
+  </div>
+  <div class="articles-information-right">
+   <button class="articles-information-right-edit">编辑我的资料</button>
+  </div>
+ </div>
+</div>
+
+<div class="left-bottom">
+ <!--展示文章的地方-->
+ <div class="left-bottom-header">
+  <div class="left-bottom-header-left">
+   <a href="<%= '/authors/'+author._id %>"><%= author.username %></a>&nbsp;的所有文章
+  </div>
+  <div class="left-bottom-header-right">
+   <span>排序方式:</span>
+   <ul>
+    <li data-flag="praiseNum" style="color: #225599;">赞数&nbsp;| </li>
+    <li data-flag="commentNum">评论数&nbsp;| </li>
+    <li data-flag="visitedNum">访问量&nbsp;| </li>
+    <li data-flag="date">发表时间&nbsp;| </li>
+    <li data-flag="tags">按标签分类</li>
+   </ul>
+  </div>
+ </div>
+ <div class="left-bottom-center" data-flag="date">
+ <% if(dateSortArticles){ 
+      dateSortArticles.forEach(function(art){ %>  
+ <div class="left-bottom-articles">
+  <div class="left-bottom-articles-first">
+   <img src="<%= author.img %>" />
+   <span>发布了文章</span>
+   <span>&nbsp;&nbsp;<%= art.createFormateDate %></span>
+  </div>
+  <div class="left-bottom-articles-second">
+   <a href="<%= '/articles/'+art._id %>" ><%= art.title %></a>
+  </div>
+  <div class="left-bottom-articles-third">
+   <span class="first-child-span"><%= art.praiseNum %></span>
+   <span class="left-bottom-articles-third-username"><%= author.username %></span>
+   <span class="left-bottom-articles-third-job"><% if(author.job){ %><%= ','+author.job %><% } %></span>
+  </div>
+  <div class="left-bottom-articles-fourth">
+   <% if(art.titleSrc){ %>
+    <img src="<%= art.titleSrc %>" class="title-src" />
+   <% } %>
+   <a href="<%= '/articles/'+art._id %>" class="left-bottom-articles-fourth-content">
+     <span class="left-bottom-articles-fourth-ellipsis"></span>
+   </a>
+   <div class="left-bottom-articles-fourth-body" style="display:none;"></div>
+   <script type="text/javascript">
+    var str="<%= art.content %>";
+    convert(str,$(".left-bottom-articles-fourth-ellipsis").last(),$(".left-bottom-articles-fourth-body").last());
+    ellipsis($(".left-bottom-articles-fourth-content").last(),$(".left-bottom-articles-fourth-ellipsis").last());
+   </script>
+  </div>
+  <div class="left-bottom-articles-fifth">
+   <span>赞同(<%= art.praiseNum %>)&nbsp;&nbsp;</span>
+   <span>反对(<%= art.opposeNum %>)&nbsp;&nbsp;</span>
+   <span>评论(<%= art.comments.length %>)&nbsp;&nbsp;</span>
+   <span>访问量(<%= art.visitedNum %>)</span>
+  </div>
+ </div>
+ <% });}else{ %>
+  <div class="left-bottom-no-articles">
+   <span>您还没有发布过文章</span><br/>
+   <a href="/editorArticle">发布新文章</a>
+  </div>
+ <% } %>
+ </div>
+
+ <div class="left-bottom-center" data-flag="praiseNum" style="display:none">
+ <% if(praiseSortArticle){ 
+      praiseSortArticle.forEach(function(art){ %>  
+ <div class="left-bottom-articles">
+  <div class="left-bottom-articles-first">
+   <img src="<%= author.img %>" />
+   <span>发布了文章</span>
+   <span>&nbsp;&nbsp;<%= art.createFormateDate %></span>
+  </div>
+  <div class="left-bottom-articles-second">
+   <a href="<%= '/articles/'+art._id %>" ><%= art.title %></a>
+  </div>
+  <div class="left-bottom-articles-third">
+   <span class="first-child-span"><%= art.praiseNum %></span>
+   <span class="left-bottom-articles-third-username"><%= author.username %></span>
+   <span class="left-bottom-articles-third-job"><% if(author.job){ %><%= ','+author.job %><% } %></span>
+  </div>
+  <div class="left-bottom-articles-fourth">
+   <% if(art.titleSrc){ %>
+    <img src="<%= art.titleSrc %>" class="title-src" />
+   <% } %>
+   <a href="<%= '/articles/'+art._id %>" class="left-bottom-articles-fourth-content">
+     <span class="left-bottom-articles-fourth-ellipsis"></span>
+   </a>
+   <div class="left-bottom-articles-fourth-body" style="display:none;"></div>
+   <script type="text/javascript">
+    var str="<%= art.content %>";
+    convert(str,$(".left-bottom-articles-fourth-ellipsis").last(),$(".left-bottom-articles-fourth-body").last());
+    ellipsis($(".left-bottom-articles-fourth-content").last(),$(".left-bottom-articles-fourth-ellipsis").last());
+   </script>
+  </div>
+  <div class="left-bottom-articles-fifth">
+   <span>赞同(<%= art.praiseNum %>)&nbsp;&nbsp;</span>
+   <span>反对(<%= art.opposeNum %>)&nbsp;&nbsp;</span>
+   <span>评论(<%= art.comments.length %>)&nbsp;&nbsp;</span>
+   <span>访问量(<%= art.visitedNum %>)</span>
+  </div>
+ </div>
+ <% });}else{ %>
+  <div class="left-bottom-no-articles">
+   <span>您还没有发布过文章</span>
+   <a href="/editorArticle">发布新文章</a>
+  </div>
+ <% } %>
+ </div>
+
+ <div class="left-bottom-center" style="display:none" data-flag="commentNum">
+ <% if(commentSortArticles){ 
+      commentSortArticles.forEach(function(art){ %>  
+ <div class="left-bottom-articles">
+  <div class="left-bottom-articles-first">
+   <img src="<%= author.img %>" />
+   <span>发布了文章</span>
+   <span>&nbsp;&nbsp;<%= art.createFormateDate %></span>
+  </div>
+  <div class="left-bottom-articles-second">
+   <a href="<%= '/articles/'+art._id %>" ><%= art.title %></a>
+  </div>
+  <div class="left-bottom-articles-third">
+   <span class="first-child-span"><%= art.praiseNum %></span>
+   <span class="left-bottom-articles-third-username"><%= author.username %></span>
+   <span class="left-bottom-articles-third-job"><% if(author.job){ %><%= ','+author.job %><% } %></span>
+  </div>
+  <div class="left-bottom-articles-fourth">
+   <% if(art.titleSrc){ %>
+    <img src="<%= art.titleSrc %>" class="title-src" />
+   <% } %>
+   <a href="<%= '/articles/'+art._id %>" class="left-bottom-articles-fourth-content">
+     <span class="left-bottom-articles-fourth-ellipsis"></span>
+   </a>
+   <div class="left-bottom-articles-fourth-body" style="display:none;"></div>
+   <script type="text/javascript">
+    var str="<%= art.content %>";
+    convert(str,$(".left-bottom-articles-fourth-ellipsis").last(),$(".left-bottom-articles-fourth-body").last());
+    ellipsis($(".left-bottom-articles-fourth-content").last(),$(".left-bottom-articles-fourth-ellipsis").last());
+   </script>
+  </div>
+  <div class="left-bottom-articles-fifth">
+   <span>赞同(<%= art.praiseNum %>)&nbsp;&nbsp;</span>
+   <span>反对(<%= art.opposeNum %>)&nbsp;&nbsp;</span>
+   <span>评论(<%= art.comments.length %>)&nbsp;&nbsp;</span>
+   <span>访问量(<%= art.visitedNum %>)</span>
+  </div>
+ </div>
+ <% });}else{ %>
+  <div class="left-bottom-no-articles">
+   <span>您还没有发布过文章</span>
+   <a href="/editorArticle">发布新文章</a>
+  </div>
+ <% } %>
+ </div>
+
+  <div class="left-bottom-center" style="display:none" data-flag="visitedNum">
+ <% if(visitedSortArticle){ 
+      visitedSortArticle.forEach(function(art){ %>  
+ <div class="left-bottom-articles">
+  <div class="left-bottom-articles-first">
+   <img src="<%= author.img %>" />
+   <span>发布了文章</span>
+   <span>&nbsp;&nbsp;<%= art.createFormateDate %></span>
+  </div>
+  <div class="left-bottom-articles-second">
+   <a href="<%= '/articles/'+art._id %>" ><%= art.title %></a>
+  </div>
+  <div class="left-bottom-articles-third">
+   <span class="first-child-span"><%= art.praiseNum %></span>
+   <span class="left-bottom-articles-third-username"><%= author.username %></span>
+   <span class="left-bottom-articles-third-job"><% if(author.job){ %><%= ','+author.job %><% } %></span>
+  </div>
+  <div class="left-bottom-articles-fourth">
+   <% if(art.titleSrc){ %>
+    <img src="<%= art.titleSrc %>" class="title-src" />
+   <% } %>
+   <a href="<%= '/articles/'+art._id %>" class="left-bottom-articles-fourth-content">
+     <span class="left-bottom-articles-fourth-ellipsis"></span>
+   </a>
+   <div class="left-bottom-articles-fourth-body" style="display:none;"></div>
+   <script type="text/javascript">
+    var str="<%= art.content %>";
+    convert(str,$(".left-bottom-articles-fourth-ellipsis").last(),$(".left-bottom-articles-fourth-body").last());
+    ellipsis($(".left-bottom-articles-fourth-content").last(),$(".left-bottom-articles-fourth-ellipsis").last());
+   </script>
+  </div>
+  <div class="left-bottom-articles-fifth">
+   <span>赞同(<%= art.praiseNum %>)&nbsp;&nbsp;</span>
+   <span>反对(<%= art.opposeNum %>)&nbsp;&nbsp;</span>
+   <span>评论(<%= art.comments.length %>)&nbsp;&nbsp;</span>
+   <span>访问量(<%= art.visitedNum %>)</span>
+  </div>
+ </div>
+ <% });}else{ %>
+  <div class="left-bottom-no-articles">
+   <span>您还没有发布过文章</span>
+   <a href="/editorArticle">发布新文章</a>
+  </div>
+ <% } %>
+ </div>
+ 
+ <div class="left-bottom-center article-left-common" style="display:none" data-flag="tags">
+  <% if(tags){ %>
+  <p class="article-category-tips">文章分类</p>
+  <div class="article-category-detail">
+   <ul>
+    <% for(var tag in tags){ %>
+     <li><a href="<%= '/category/'+tag+'/'+author._id %>"><%= tag %></a><span>(<%= tags[tag] %>)</span></li>
+    <% } %>
+   </ul>
+  </div>
+  <% }else{ %>
+  <div class="left-bottom-no-articles">
+   <span>您还没有发布过文章</span>
+   <a href="/editorArticle">发布新文章</a>
+  </div>
+  <% } %>
+ </div>
+
+</div>
+</div>
+<div class="right">
+ 开发ing
+</div>
+<form enctype="multipart/form-data" method="POST" class="imgChangeForm" style="display:none;">
+ <input type="file" name="imgChange" class="imgChange">
+</form>

@@ -1,0 +1,30 @@
+<% layout("emptyLayout") %>
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>登陆和注册</title>
+  <link href="/css/loginorregister.css" type="text/css" rel="stylesheet">
+  <script type="text/javascript" src="/javascript/jquery-1.12.2.js"></script>
+  <script type="text/javascript" src="/javascript/loginorregister.js"></script>
+ </head>
+ <body>
+  <div id="main">
+   <h1>博客</h1>
+   <p>与世界分享你的知识、经验和见解</p>
+   <span id="register" class="block">注册</span>
+   <span id="login" class="block">登陆</span>
+   <div id="line">
+    <span id="left"></span>
+    <span id="right"></span>
+  </div>
+   <div id="container">
+    <form method="post" action="/login" id="registerForm" data-flag=<%=flag%> >
+     <div class="usernameDiv"><input type="text" name="username" placeholder="用户名" id="username"><span class="usernameTips"></span></div>
+     <div class="emailDiv"><input type="text" name="email" placeholder="邮箱" id="email"><span class="emailTips"></span></div>
+     <div class="passwordDiv"><input type="password" name="password" placeholder="密码(不少于6位)" id="password"><span class="pwdTips"></span></div>
+     <input type="submit" value="注册博客" id="submit">
+    </form>
+   </div> 
+  </div>
+ </body>
+</html>

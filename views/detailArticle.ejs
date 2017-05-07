@@ -1,0 +1,213 @@
+<link rel="stylesheet" type="text/css" href="/css/detailArticle.css">
+<script type="text/javascript" rel="stylesheet" src="/javascript/detailArticle.js"></script>
+<script type="text/javascript" rel="stylesheet" src="/javascript/comment.js"></script>
+<div class="article-left">
+ <div class="personal-information article-left-common">
+  <p class="personal-information-tips">个人资料</p>
+  <div class="personal-information-basic">
+   <a href="<%= article.authorHref %>"><img class="personal-information-basic-image" src="<%= article.author.img %>" />
+   <p class="personal-information-basic-name"><%= article.author.username %></p></a>
+   <div class="personal-information-basic-extra">
+    <span class="personal-information-basic-extra-add personal-information-basic-extra-common">
+     <span class="personal-information-basic-extra-add-sprites"></span>
+     <span class="personal-information-basic-extra-add-words personal-information-basic-extra-words-common">关注</span>
+    </span>
+    <span class="personal-information-basic-extra-msg personal-information-basic-extra-common">
+     <span class="personal-information-basic-extra-msg-sprites"></span>
+     <span class="personal-information-basic-extra-msg-words personal-information-basic-extra-words-common">私信</span>
+    </span>
+   </div>
+  </div>
+  <div class="personal-information-line"></div>
+  <div class="personal-information-articles">
+   <p>总赞同数:<%= article.totalPraiseNum %></p>
+   <p>总反对数:<%= article.totalOpposeNum %></p>
+   <p>总访问量:<%= article.totalVisitedNum %></p>
+   <p>评论总数:<%= article.totalCommentsNum %></p>
+   <p>文章总数:<%= article.totalArticlesNum %></p>
+  </div>
+ </div>
+
+ <div class="article-category article-left-common">
+  <p class="article-category-tips">文章分类</p>
+  <div class="article-category-detail">
+   <ul>
+    <% for(var tag in tags){ %>
+     <li><a href="<%= '/category/'+tag+'/'+article.author._id %>"><%= tag %></a><span>(<%= tags[tag] %>)</span></li>
+    <% } %>
+   </ul>
+  </div>
+ </div>
+
+ <div class="article-visited-sort article-left-common">
+  <p>阅读排行榜</p>
+  <div class="article-visited-sort-detail">
+   <ul>
+    <% visitedSortArticle.forEach(function(visited){ %>
+        <li><a href="<%= '/articles/'+visited._id %>"><%= visited.title %></a><span>(<%= visited.visitedNum %>)</span></li>
+    <% }) %>
+   </ul>
+  </div>
+ </div>
+
+ <div class="article-comment-sort article-left-common">
+  <p>评论排行榜</p>
+  <div class="article-comment-sort-detail">
+   <ul>
+    <% commentSortArticles.forEach(function(visited){ %>
+        <li><a href="<%= '/articles/'+visited._id %>"><%= visited.title %></a><span>(<%= visited.comments.length %>)</span></li>
+    <% }) %>
+   </ul>
+  </div>
+ </div>
+
+ <div class="article-praise-sort article-left-common">
+  <p>推荐排行榜</p>
+  <div class="article-praise-sort-detail">
+   <ul>
+    <% praiseSortArticle.forEach(function(visited){ %>
+        <li><a href="<%= '/articles/'+visited._id %>"><%= visited.title %></a><span>(<%= visited.praiseNum %>)</span></li>
+    <% }) %>
+   </ul>
+  </div>
+ </div>
+
+ <div class="article-date-sort article-left-common">
+  <p>创作日期排行榜</p>
+  <div class="article-date-sort-detail">
+   <ul>
+    <% dateSortArticles.forEach(function(visited){ %>
+        <li><a href="<%= '/articles/'+visited._id %>"><%= visited.title %></a><span>(<%= visited.createFormateDate %>)</span></li>
+    <% }) %>
+   </ul>
+  </div>
+ </div>
+</div>
+
+<div class="article-right">
+<% if(article.content){ %>
+ <div class="article-right-header article-right-common">
+  <p class="article-right-header-title"><%= article.title %></p>
+  <div class="article-right-header-tags">标签:<span><%= article.tags %></span></div>
+  <div class="article-right-header-basic">
+   <span><%= article.createFormateDate %></span>
+   <span>阅读(<%= article.visitedNumAdd %>)</span>
+   <span>评论(<%= article.comments.length %>)</span>
+   <span>反对(<%= article.opposeNum %>)</span>
+   <span>赞同(<%= article.praiseNum %>)</span>
+  </div>
+ </div>
+
+ <div class="article-right-body article-right-common">
+  <div class="article-right-body-center">
+   <!--放置文章内容的地方,每次都需要处理这个文章的内容才能正确的显示-->
+  </div>
+  <script type="text/javascript">
+   var str="<%= article.content %>";
+   convert(str,$(".article-right-body-center"),$());
+  </script>
+ </div>
+
+ <div class="article-right-tail article-right-common">
+  <div class="article-right-tail-num">
+   <span><div class="article-right-tail-num-div"></div>顶<br><i class="article-right-tail-num-praise"><%= article.praiseNum %></i></span>
+   <span><div class="article-right-tail-num-div"></div>踩<br><i class="article-right-tail-num-oppose"><%= article.opposeNum %></i></span>
+  </div>
+  <ul class="article-right-tail-next">
+   <li>
+    <% if(article.pre==""){ %>
+     <span class="article-right-tail-next-tip" disabled="disabled">上一篇:</span>
+     <span class="article-right-tail-next-words" disabled="disabled" style="text-decoration:none;">无上一篇</span>
+    <% }else{ %>
+     <span class="article-right-tail-next-tip">上一篇:</span>
+     <a href="<%= '/articles/'+article.pre._id %>" class="article-right-tail-next-words"><%= article.pre.title %></a>
+    <% } %>
+   </li>
+   <li>
+    <% if(article.next==""){ %>
+     <span class="article-right-tail-next-tip" disabled="disabled">下一篇:</span>
+     <span class="article-right-tail-next-words" disabled="disabled" style="text-decoration:none;">无下一篇</span>
+    <% }else{ %>
+     <span class="article-right-tail-next-tip">下一篇:</span>
+     <a href="<%= '/articles/'+article.next._id %>" class="article-right-tail-next-words"><%= article.next.title %></a>
+    <% } %>
+   </li>
+  </ul>
+ </div>
+ <div class="store-id" style="display:none"><%= article._id %></div>
+ <% }else{ %>
+  <div class="article-right-body article-right-common">
+      <!-- 文章的分类显示 -->
+      <p class="current-tags">当前标签--&gt;<span><%= tag %></span></p>
+      <% tagsCategory.forEach(function(art){ %>
+       <div class="article-right-body-center-category">
+        <p class="article-right-body-center-title"><%= art.title %></p>
+        <a class="article-right-body-center-a" href="<%= '/articles/'+art._id %>" >
+         <div class="article-right-body-center"></div>
+        </a>
+        <div style="display:none" class="store-content"></div>
+        <script type="text/javascript">
+          var str="<%= art.content %>";
+          convert(str,$(".article-right-body-center").last(),$(".store-content").last());
+          ellipsis($(".article-right-body-center-a").last(),$(".article-right-body-center").last());
+         </script>
+        <div class="article-right-body-center-div">
+         <span><%= art.createFormateDate %></span>
+         <span>阅读(<%= art.visitedNum %>)</span>
+         <span>评论(<%= art.comments.length %>)</span>
+         <span>反对(<%= art.opposeNum %>)</span>
+         <span>赞同(<%= art.praiseNum %>)</span>
+        </div>
+       </div>
+      <% }) %>
+  </div>
+  <% } %>
+
+ <div class="article-right-comment article-right-common">
+  <!--这里是评论模块，暂时不做，先把文章显示好了在做评论模块-->
+  <div class="article-right-comment-header">
+   <textarea class="commentText"></textarea>
+   <button class="commentBtn">评论</button>
+  </div>
+  <div class="article-right-comment-content">
+  <ul class="article-right-comment-ul">
+  <% if(flag){ %>
+    <li class="comment-item">
+  <div class="comment-left">
+   <a href="<%= '/authors/'+author_id %>">
+    <img src="<%= author_img %>" />
+   </a>
+  </div>
+  <div class="comment-right">
+
+   <div class="cm-first">
+    <a href="<%= '/authors/'+author_id %>" class="cm-user">
+     <span><%= author_username %></span>
+    </a>
+    <span class="cm-date"><%= formateDate %></span>
+   </div>
+
+   <div class="cm-second">
+    <span class="cm-content"><%= content %></span>
+   </div>
+   
+   <div class="cm-third">
+    <a href="" class="cm-praise" >
+     <%= praiseNum %>
+    </a>
+    <a href="" class="cm-oppose">
+     <%= opposeNum %>
+    </a>
+    <a href="" class="cm-replayNum">
+     <%= replied.length %>
+    </a>
+   </div>
+   
+  </div>
+  <ul></ul>
+ </li>
+ <% } %>
+  </ul>
+ </div>
+ </div>
+</div>

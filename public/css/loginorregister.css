@@ -1,0 +1,105 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+html{
+	font-size:12px;
+	color: #000;
+	text-align: center;
+}
+#main{
+	
+}
+#main h1{
+	font-size: 100px;
+	color: #0F88EB;
+}
+#main p{
+	font-size: 14px;
+	color: #979899;
+}
+.block{
+	display: inline-block;
+	width:50px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	font-size: 18px;
+	color: #000;
+	cursor: pointer;
+}
+#register{
+	color: #0F88EB;
+}
+#line{
+	width:100px;
+	margin:0 auto;
+	background: #fff;
+}
+#left{
+	display: inline-block;
+	float: left;
+	width:50px;
+	height: 2px;
+	background-color: #0F88EB;
+}
+#right{
+	float: left;
+	display: inline-block;
+	width:50px;
+	height: 2px;
+
+}
+#registerForm{
+	clear: both;
+	margin-top:20px;
+}
+#registerForm input{
+	/*margin:0 auto;*/
+	width:240px;
+	height: 40px;
+	border-top:1px solid #D5D5D5;
+	border-left: 1px solid #D5D5D5;
+	border-right: 1px solid #D5D5D5;
+	display: inline-block;
+	padding-left:10px;
+}
+#registerForm #username{
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+#registerForm #password{
+	border-bottom:1px solid #D5D5D5;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+#registerForm #submit{
+	margin-top:30px;
+	background: #0F88EB;
+	border-radius: 4px;
+	line-height: 40px;
+	text-align: center;
+	cursor: pointer;
+}
+.usernameDiv{
+}
+.usernameDiv,.emailDiv,.passwordDiv{
+	margin:0 auto;
+	width:272px;
+	height: 41px;
+	vertical-align: middle;
+}
+.usernameTips,.emailTips,.pwdTips{
+	color:#f00;
+	width:40px;
+	height: 40px;
+	text-align: center;
+	margin-left: -40px;
+	display: inline-block;
+	font-size: 12px;
+	vertical-align: bottom;
+	/*visibility: hidden;*/
+}
+.tipsColor{
+	color: #0f0;
+}

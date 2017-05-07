@@ -1,0 +1,389 @@
+.left{
+	width: 632px;
+	min-height: 300px;
+	height: auto;
+	float: left;
+}
+.left-top,.left-bottom{
+	width:100%;
+	height: 100%;
+ 	border:1px solid #DDDDDD;
+	border-radius: 4px;
+	margin-top:20px;
+	box-sizing: border-box;
+	padding:10px 20px;
+	font-size: 14px;
+}
+.left-bottom{
+	margin-bottom: 30px;
+}
+.personal-information{
+	width:100%;
+	height: 100%;
+	overflow: hidden;
+}
+.personal-information-left{
+    width: 100px;
+    height: 100%;
+    margin-right: 15px;
+    float: left;
+}
+.personal-information-img{
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	border-radius: 6px;
+	cursor: pointer;
+}
+.personal-information-left-a:hover{
+   text-decoration: underline;
+}
+.personal-information-right{
+    font-size: 13px;
+    float: left;
+}
+.personal-information-right-username{
+   color: #222222;
+   font-size: 20px;
+   line-height: 1.7;
+   margin-bottom: 10px;
+}
+.personal-information-right-line-common{
+	height: 35px;
+	color: #666666;
+}
+div.personal-information-right-line3,div.personal-information-right-line4{
+	min-height: 35px;
+	height: auto;
+	overflow: hidden;
+}
+div.personal-information-right-line3 button,div.personal-information-right-line4 button{
+	float: right;
+}
+.personal-information-right-line0-div{
+	margin-right: 15px;
+}
+.personal-information-right-line-common div{
+    display: inline-block;
+}
+.personal-information-right-line-common span{
+	display: inline-block;
+}
+.personal-information-right-line1-sprites-common{
+    width: 15px;
+	height: 15px;
+	vertical-align: top;
+}
+.personal-information-right-line0-sprites{
+	background: url("/images/sprites.png") no-repeat -93px -106px;
+}
+.personal-information-right-line1-sprites{
+	background: url("/images/sprites.png") no-repeat -57px -106px;
+}
+.personal-information-right-line2-sprites{
+	background: url("/images/sprites.png") no-repeat -110px -106px;
+}
+.personal-information-right-line3-sprites{
+	background: url("/images/sprites.png") no-repeat -160px -106px;
+}
+.personal-information-right-line4-sprites{
+	background: url("/images/sprites.png") no-repeat -160px -106px;
+}
+.write-information-a-common{
+	text-decoration: none;
+	color: #698EBF;
+	cursor: pointer;
+}
+.write-information-a-common:hover{
+	text-decoration: underline;
+	color: #235698;
+}
+.personal-information-right-line-common .write-personal-information-common{
+	display: none;
+}
+.write-personal-information-common input[type=text]{
+    width:113px;
+    height: 28px;
+    border:1px solid #CCCCCC;
+    outline: 0 none;
+    border-radius: 4px;
+    padding:1px 0px 1px 4px;
+}
+.write-information-sure-button{
+	width: 50px;
+	height: 33px;
+	background: linear-gradient(to bottom, #086ed5, #055db5);
+	background: -webkit-linear-gradient(to bottom, #086ed5, #055db5);
+	background: -moz-linear-gradient(to bottom, #086ed5, #055db5);
+	background: -ms-linear-gradient(to bottom, #086ed5, #055db5);
+	background: -o-linear-gradient(to bottom, #086ed5, #055db5);
+	color: #fff;
+	text-align: center;
+	border:1px solid #086ed5;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.write-personal-information-common-special textarea{
+    width: 420px;
+    min-height: 80px;
+    height: auto;
+    border:1px solid #CCCCCC;
+    border-radius: 4px;
+    outline: 0 none;
+    display: block;
+    margin-bottom: 4px;
+    resize: none;
+    padding-left: 4px;
+}
+.personal-information-common{
+	color: #666666;
+	display: inline-block;
+	margin-left: 15px;
+}
+.personal-information-right-line-fix{
+	text-decoration: none;
+	cursor: pointer;
+}
+.personal-information-right-line-fix span{
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	background:url("/images/sprites.png") no-repeat -121px -50px;
+}
+.personal-information-right-line-fix-hover{
+    background:url("/images/sprites.png") no-repeat -132px -50px;
+    color: #666666;
+    text-decoration: underline;
+}
+.personal-information-right-line-fix-div{
+
+}
+.articles-information{
+	margin-top:15px;
+	color:#666666;
+	overflow: hidden;
+}
+.articles-information-left{
+	float: left;
+}
+.articles-information-right{
+    float: right;
+}
+.articles-information div{
+	display: inline-block;
+}
+.articles-information-right-edit{
+	background-color:#E7E7E9;
+	border:1px solid #C5C5C5;
+	border-radius: 4px;
+	width:100px;
+	height: 30px;
+	text-align: center;
+	cursor: pointer;
+}
+.articles-information-right-edit:hover{
+	background-color: #2255B2;
+	color: #fff;
+}
+.left-bottom-header{
+	width:100%;
+	height: 40px;
+	overflow: hidden;
+}
+.left-bottom-header-left{
+	float: left;
+	font-size: 14px;
+	color:#666666;
+	font-weight: bold;
+}
+.left-bottom-header-left a{
+	text-decoration: none;
+    font-size: 18px;
+    color:#2255B2;
+}
+.left-bottom-header-left a:hover{
+	text-decoration: underline;
+}
+.left-bottom-header-right{
+	float: right;
+}
+.left-bottom-header-right span:first-child{
+	color:#666666;
+}
+.left-bottom-header-right ul{
+	list-style-type: none;
+	display: inline-block;
+}
+.left-bottom-header-right ul li{
+	display: inline-block;
+    color:#999999;
+    cursor: pointer;
+}
+.left-bottom-header-right ul li:hover{
+    color: #225599;
+}
+.left-bottom-center,.left-bottom-no-articles{
+	width:100%;
+}
+.left-bottom-articles{
+	padding-bottom: 10px;
+	border-bottom: 1px solid #DDD;
+	margin-bottom: 10px;
+}
+.left-bottom-no-articles{
+	height: 159px;
+    width:550px;
+    line-height: 550px;
+    background: url("/images/edit.png") no-repeat top left;
+	text-align: center;
+}
+.left-bottom-no-articles a{
+	text-decoration: none;
+}
+.left-bottom-no-articles a:hover{
+	text-decoration: underline;
+}
+.left-bottom-articles-first img{
+	display: inline-block;
+	margin-right: 10px;
+	width:20px;
+	height: 20px;
+	border-radius: 4px;
+}
+.left-bottom-articles-first span{
+	color:#999999;
+	vertical-align: top;
+}
+.left-bottom-articles-second{
+	margin-bottom: 5px;
+}
+.left-bottom-articles-second a{
+	color: #2255B2;
+	font-size: 16px;
+	text-decoration: none;
+}
+.left-bottom-articles-second a:hover{
+	text-decoration: underline;
+}
+.left-bottom-articles-third .first-child-span{
+	display: inline-block;
+	background-color: #EFF6FA;
+	color:#A3D5F4;
+	text-align: center;
+	width: 38px;
+	height: 21px;
+	border-radius: 4px;
+	margin-right: 10px;
+}
+.left-bottom-articles-third .first-child-span:hover{
+	background-color: #698EBF;
+	color:#fff;
+}
+.left-bottom-articles-third-username{
+	color:#222222;
+}
+.left-bottom-articles-third-job{
+	color:#999;
+}
+.left-bottom-articles-fourth{
+	overflow: hidden;
+}
+.left-bottom-articles-fourth-img{
+	display: inline-block;
+}
+.title-src{
+	width:200px;
+    height: 124px;
+    display: inline-block;
+    margin-right: 10px;
+    border:1px solid #fff;
+    border-radius: 4px;
+    margin-left: 20px;
+}
+.title-src-big{
+	width: 570px !important;
+	height: 250px !important;
+}
+.left-bottom-articles-fourth-content,.left-bottom-articles-fourth-body{
+	display: inline-block;
+    width:350px;
+    height: 119px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /*white-space: nowrap;*/
+    word-wrap: break-word;
+    word-spacing: 8px;
+    color: #222222;
+    position: relative;
+}
+.left-bottom-articles-fourth .left-bottom-articles-fourth-body{
+	height: auto;
+	width: 570px;
+}
+.show-all{
+	color:#225599;
+	display: inline-block;
+	margin-left: 4px;
+	z-index: 100;
+}
+.show-ellipsis{
+	display: inline-block;
+	width:50px;
+	height: 20px;
+	background: #8DC1ED;
+	text-align: center;
+	color: #fff;
+	border-radius: 4px;
+	float:right;
+	cursor: pointer;
+}
+.show-all:hover{
+	background: #EFF6FA;
+}
+.left-bottom-articles-fourth-ellipsis{
+    font-size: 14px !important;
+    line-height: 1.7;   /*缩放因子，是字体的1.7倍*/
+    display: inline-block;
+}
+.left-bottom-articles-fifth{
+	margin-left: 20px;
+	margin-top:10px;
+}
+.left-bottom-articles-fifth span{
+	color: #999;
+}
+.article-left-common p{
+	font-size: 16px;
+	color:#333333;
+	text-align: left;
+	margin-bottom: 10px;
+}
+.article-left-common ul{
+	list-style-type: none;
+}
+.article-left-common ul li{
+	width:260px;
+	padding-left:15px; 
+	display: block;
+}
+.article-left-common ul li a{
+    color: #E0A226;
+    text-decoration: none;
+    display: inline-block;
+    width: 120px;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 5px;
+}
+.article-left-common ul li span{
+	vertical-align: top;
+}
+.article-left-common ul li a:hover{
+	text-decoration: underline;
+}
+.right{
+	width:285px;
+	margin-left: 35px;
+	float: left;
+}
