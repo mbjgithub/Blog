@@ -13,7 +13,10 @@ app.post('/comments',function(req,res){
          if(comments.length===0){
          	res.json({tips:'暂时没有评论，快来抢沙发吧'})
          }else{
+            comments =JSON.stringify(comments)
+            comments=JSON.parse(comments)
          	formateComments(comments)
+
             console.log(comments)        //这里也好奇怪，明明是对象，我在formateComments里面添加了属性，结果没有添加
          	res.json({comments:comments})
          }
@@ -113,33 +116,33 @@ function formateDate(item){
 	item.formateDate=formateDate
 }
 
-// var test=[
-//    {
-//    	_id:1,
-//    	reply_id:[3,5],
-//    	author_username:"mbj"
-//    },
-//    {
-//    	_id:2,
-//    	reply_id:[],
-//    	author_username:'wmy'
-//    },
-//    {
-//    	_id:3,
-//    	reply_id:[4],
-//    	author_username:'mgs'
-//    },
-//    {
-//    	_id:4,
-//     reply_id:[5],
-//     author_username:"hcx"
-//    },
-//    {
-//    	_id:5,
-//    	reply_id:[],
-//    	author_username:'mfj'
-//    }
-// ]
+var test=[
+   {
+   	_id:1,
+   	reply_id:[3,5],
+   	author_username:"mbj"
+   },
+   {
+   	_id:2,
+   	reply_id:[],
+   	author_username:'wmy'
+   },
+   {
+   	_id:3,
+   	reply_id:[4],
+   	author_username:'mgs'
+   },
+   {
+   	_id:4,
+    reply_id:[5],
+    author_username:"hcx"
+   },
+   {
+   	_id:5,
+   	reply_id:[],
+   	author_username:'mfj'
+   }
+]
 
 
 

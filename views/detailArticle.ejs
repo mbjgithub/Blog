@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="/css/detailArticle.css">
+<link rel="stylesheet" type="text/css" href="/css/comments.css">
 <script type="text/javascript" rel="stylesheet" src="/javascript/detailArticle.js"></script>
 <script type="text/javascript" rel="stylesheet" src="/javascript/comment.js"></script>
 <div class="article-left">
@@ -167,46 +168,45 @@
   <!--这里是评论模块，暂时不做，先把文章显示好了在做评论模块-->
   <div class="article-right-comment-header">
    <textarea class="commentText"></textarea>
-   <button class="commentBtn">评论</button>
+   <a class="commentBtn">评论</a>
   </div>
-  <div class="article-right-comment-content">
+  <div class="article-right-comment-content" style="display:none">
   <ul class="article-right-comment-ul">
-  <% if(flag){ %>
+
     <li class="comment-item">
   <div class="comment-left">
-   <a href="<%= '/authors/'+author_id %>">
-    <img src="<%= author_img %>" />
+   <a href="{%= '/authors/'+author_id %}">
+    <img src="{%= author_img %}" />
    </a>
   </div>
   <div class="comment-right">
 
    <div class="cm-first">
-    <a href="<%= '/authors/'+author_id %>" class="cm-user">
-     <span><%= author_username %></span>
+    <a href="{%= '/authors/'+author_id %}" class="cm-user">
+     <span>{%= author_username %}</span>
     </a>
-    <span class="cm-date"><%= formateDate %></span>
+    <span class="cm-date">{%= formateDate %}</span>
    </div>
 
    <div class="cm-second">
-    <span class="cm-content"><%= content %></span>
+    <span class="cm-content">{%= content %}</span>
    </div>
    
    <div class="cm-third">
     <a href="" class="cm-praise" >
-     <%= praiseNum %>
+     (<em>{%= praiseNum %}</em>)
     </a>
     <a href="" class="cm-oppose">
-     <%= opposeNum %>
+     (<em>{%= opposeNum %}</em>)
     </a>
     <a href="" class="cm-replayNum">
-     <%= replied.length %>
+     回复({%= replied.length %})
     </a>
    </div>
    
   </div>
-  <ul></ul>
+  <ul class="article-right-comment-ul"></ul>
  </li>
- <% } %>
   </ul>
  </div>
  </div>

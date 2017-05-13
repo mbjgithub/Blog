@@ -1,3 +1,7 @@
 登陆成功之后，不跳回登陆前的页面，永远都是调到首页，这样不好
 
 routers/comment.js 这里也好奇怪，明明是对象，我在formateComments里面添加了属性，结果没有添加
+把它转成json字符串后在转成json对象后，就OK了，可能是子schema里面的对象有问题
+
+
+需要关注css，html不能专注的写业务逻辑

@@ -3,7 +3,7 @@
 // var commentTpl=require('./template/comment.tpl')
 var commentTpl
 var _id
-var compileReg=/<%\s*=\s*(?:(?:['"])([^><]*)(?:['"])\+)*([\w-\.]+)\s*%>/gm
+var compileReg=/{%\s*=\s*(?:(?:['"])([^{}]*)(?:['"])\+)*([\w-\.]+)\s*%}/gm
 
 
 function parse(comments,parent){
@@ -24,7 +24,11 @@ function render(comment,parent){
 
 function compile(tpl,data){
     return tpl.replace(compileReg,function(a,b,c){
-        return (b||"")+data[c]
+        var d=c.split('.')
+        var res
+        res=d.length<=1?(b||"")+data[d[0]]:
+              (b||"")+data[d[0]][d[1]]
+        return res
     })
 }
 
@@ -34,7 +38,9 @@ $(function(){
     _id=location.href.slice(location.href.lastIndexOf('/')+1)||""
     console.log(_id)
     var parent=$('.article-right-comment-content')
-    commentTpl=parent.html()
+    var sonUl=parent.find('.article-right-comment-ul').first()
+    commentTpl=sonUl.html()
+    sonUl.html("")
     if(!_id) return
     $.ajax({
         method:'POST',
@@ -47,7 +53,8 @@ $(function(){
             }else if(data.tips){
                 parent.text(data.tips)
             }else{
-                parse(data.comments,parent.find('.article-right-comment-ul'))
+                parse(data.comments,sonUl)
+                parent.css('display',"block")
             }
         }
     })
