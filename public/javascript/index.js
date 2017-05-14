@@ -1,8 +1,9 @@
+
 $(document).ready(function(){
-	$(".sprite-delete").click(function(){
+	$(".left").on("click",".sprite-delete",function(){
 		$(this).parents(".line").css("display","none");
 	});
-	$(".praiseNum").click(function(){
+	$(".left").on("click",".praiseNum.",function(){
 		var val=$(this).text();
 		var $this=$(this);
 		val=(val==""||val==null)?0:parseInt(val);
@@ -27,10 +28,6 @@ $(document).ready(function(){
 		});
 	});
 
-    $(".authorname").hover(function(){
-
-    },function(){
-    	
-    });
+    
 
 });

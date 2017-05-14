@@ -34,7 +34,7 @@
             sonObj.text(sonObj.text().replace(/(.){15}(\.\.\.)$/,"...")).append("<span class='show-all'>显示全部</span>");
   }
   $(function(){
-        $(".show-all").click(function(e){
+        $(".left").on("click",".show-all",function(e){
        e.stopImmediatePropagation();
        e.preventDefault();
        $(this).parent().parent().prev().addClass("title-src-big");
@@ -49,7 +49,7 @@
        //    $(this).remove();
        // });
     });
-       $('.show-ellipsis') .click(function(){
+       $('.left') .on("click",".show-ellipsis",function(){
            $(this).parent().css("display","none");
           $(this).parent().prev().prev().removeClass("title-src-big");
           $(this).parent().prev().css("display","inline-block");

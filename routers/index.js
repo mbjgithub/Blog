@@ -12,10 +12,8 @@ var config={
 }
 
 router.get("/",function(req,res){
-  // console.log(req.sessionID)
-  // console.log(req.cookies)
-  var pageSize=req.query.pageSize||config.pageSize
-  var pageIndex=req.query.pageIndex||config.pageIndex
+  var pageSize=req.body.pageSize||config.pageSize
+  var pageIndex=req.body.pageIndex||config.pageIndex
   var user="";
     if(req.session.user){   //用session存储用户
            user=req.session.user;
@@ -41,10 +39,28 @@ router.get("/",function(req,res){
      });
 });
 
-router.get('/scrollLoad',function(req,res){
-    var start=req.body.start
-    var num=req.body.num
-    renderIndex(req,res,0,5,true)     //true表示是scrollload
+router.post('/scrollLoad',function(req,res){
+  var pageSize=req.body.pageSize||config.pageSize
+  var pageIndex=req.body.pageIndex||config.pageIndex
+            //查询条件  需要查询的字段
+    ArticleModel.find({},null,{
+      sort:{
+        createDate:-1
+      },
+      limit:pageSize,
+      skip:pageIndex*pageSize
+    }).populate(["author"]).exec(function(err,docs){  //ArticleModel.find({}).limit(5).sort("-createDate")
+          docs.forEach(function(doc){
+            doc.commentNum=doc.comments.length;
+            doc.img=doc.author.img;
+            doc.articleHref="/articles/"+doc._id;
+            doc.authorHref="/authors/"+doc.author._id;
+            doc.createFormateDate=util.formateDate(doc.createDate);
+            doc.content=util.convert(doc.content)
+            doc.shortContent=util.ellipsis(doc.content)
+          });
+          res.json({articles:docs});
+     });
 })
 
 
@@ -101,27 +117,3 @@ module.exports=router;
 // .run(callback); 
 
 
-function renderIndex(req,res,start,num,flag){
-  num=num||5
-  start=start||0
-  var user="";
-    if(req.session.user){   //用session存储用户
-           user=req.session.user;
-    } 
-     ArticleModel.find({}).sort("-createDate").populate(["author"]).exec(function(err,docs){
-          if(err||docs.length===0){
-            res.render("404page",{errorMsg:"获取数据失败"})
-            return 
-          }
-          docs=docs.slice(0,num)
-          docs.forEach(function(doc){
-            doc.commentNum=doc.comments.length;
-            doc.img=doc.author.img;
-            doc.articleHref="/articles/"+doc._id;
-            doc.authorHref="/authors/"+doc.author._id;
-            doc.createFormateDate=util.formateDate(doc.createDate);
-          });
-          flag?res.json({articles:docs}):
-            res.render("index",{user:user,title:"首页--博客",articles:docs});
-     });
-}
