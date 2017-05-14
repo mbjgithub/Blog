@@ -164,7 +164,8 @@
   </div>
   <% } %>
 
- <div class="article-right-comment article-right-common">
+<% if(article.content){ %>
+ <div class="article-right-comment article-right-common" id="comments">
   <!--这里是评论模块，暂时不做，先把文章显示好了在做评论模块-->
   <div class="article-right-comment-header">
    <textarea class="commentText" id="commentTextId"></textarea>
@@ -211,4 +212,5 @@
   </ul>
  </div>
  </div>
+ <% } %>
 </div>

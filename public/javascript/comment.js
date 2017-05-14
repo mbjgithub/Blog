@@ -71,7 +71,31 @@ $(function(){
         var commentModule=$('.article-right-comment-header').first().clone()
         $(this).parent().parent().append(commentModule)
     })
-    
+
+     $('.article-right-comment').on("click",".cm-praise,.cm-oppose",function(e){
+        if(this.isClicked) return
+        var em=$(this).find('em')
+        var num=em.text()
+        num=parseInt(num)+1
+        em.text(num)
+        var comment_id=$(this).parent().find('.cm-replayNum').attr('data-parentId')
+        var key=$(this).hasClass('cm-praise')?"praiseNum":"opposeNum"
+        this.isClicked=true
+        $.ajax({
+            method:"POST",
+            url:"/saveCommentNum",
+            data:{
+                article_id:_id,
+                comment_id:comment_id,
+                num:num,
+                key:key
+            },
+            success:function(){
+                
+            }
+        })
+    })
+     
     function saveComment(e){
         var that=$(this)
         var isReply=true

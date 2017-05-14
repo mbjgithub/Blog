@@ -161,6 +161,14 @@ function by(attr){
     }
 }
 
+function map(arr,fn){
+    for(var i=0,len=arr.length;i<len;i++){
+        if(fn(arr[i],i,arr)){
+            return
+        }
+    }
+}
+
 module.exports={
 formateDate:formateDate,
 commentSort:commentSort,
@@ -172,5 +180,6 @@ tagsShow:tagsShow,
 dealMultipartFormData:dealMultipartFormData,
 ellipsis:ellipsis,
 convert:convert,
-by:by
+by:by,
+map:map
 }

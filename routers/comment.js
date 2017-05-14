@@ -92,6 +92,24 @@ app.post('/saveComments',function(req,res){
     })
 })
 
+
+app.post('/saveCommentNum',function(req,res){
+     ArticleModel.findOne({_id:req.body.article_id},function(err,article){
+            var comments=article.comments
+            comments=JSON.stringify(comments)
+            comments=JSON.parse(comments)
+            utils.map(comments,function(comment){
+                 if(comment._id===req.body.comment_id){
+                    comment[req.body.key]=req.body.num
+                    return true
+                 }
+            })
+           ArticleModel.update({_id:req.body.article_id},{$set:{comments:comments}},function(){
+              res.json({})
+           })
+     })
+})
+
 module.exports=app
 
 /**
