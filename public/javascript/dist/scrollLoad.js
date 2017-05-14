@@ -46,33 +46,49 @@
 
 	var articleTpl=__webpack_require__(1)
 
-	var compileReg=/{%\s*=\s*(?:(?:['"])([^{}]*)(?:['"])\+)*([\w-\.]+)\s*%}/gm
+	var compileReg=/{%\s*=\s*(?:(?:['"])([^{}]*)(?:['"])\+)*([\w-\.]+)[\+]?(\w*)\s*%}/gm
 	var pageContext={
 	    pageIndex:0,
 	    pageSize:5
 	}
 	var _throttle=200
+	var timer
+
+	function getClientHeight() {
+	    if (document.compatMode == 'BackCompat') {
+	        return document.body.clientHeight
+	    } else {
+	        return document.documentElement.clientHeight
+	    }
+	}
+
+
 
 	function compile(tpl,data){
-	    return tpl.replace(compileReg,function(a,b,c){
+	    return tpl.replace(compileReg,function(a,b,c,e){
 	        var d=c.split('.')
-	        var res
-	        res=d.length<=1?(b||"")+(data[d[0]]||""):
-	              (b||"")+(data[d[0]][d[1]]||"")
-	        return res
+	        var res,temp;
+	        temp=d.length<=1?data[d[0]]:data[d[0]][d[1]]
+	        if(temp==undefined){
+	            temp=""
+	        }
+	        return (b||"")+temp+(e||"")
 	    })
 	}
 
-	$(window).on('scroll',function(){
-	    $('.loadTip').css('display','block')
+	$(window).on('scroll',function(e){
+	    var loadTip=$('.loadTip')
+	    loadTip.css('display','block')
+	    if(loadTip[0].getBoundingClientRect().top+10<getClientHeight()){
 		if(timer!=undefined) clearTimeout(timer)
 		timer=setTimeout(function(){
-	        scrollLoad()
+	        scrollLoad(e)
 		},_throttle)
+	  }
 	})
 
 
-	function scrollLoad(){
+	function scrollLoad(e){
 	    var left=$('.left')
 	    pageContext.pageIndex++
 		$.ajax({
@@ -86,12 +102,19 @@
 	                var tpl
 	                articles.forEach(function(article){
 	                    tpl= compile(articleTpl,article)
-	                    fragment.appendChild($(tpl)[0])
+	                    tpl=$(tpl)
+	                    var titleSrc=tpl.find('.title-src')
+	                    if(titleSrc.attr("src").indexOf('/')<=-1){
+	                        titleSrc.remove()
+	                    }
+	                    fragment.appendChild(tpl[0])
 	                })
-	                $('.left').append(fragment)
+	               
+	                $(fragment).insertBefore($('.left').find('.loadTip'))
 	                 $('.loadTip').css('display','none')
 	            }else{
 	                 $('.loadTip').text("没有更多文章了")
+	                 $(window).off('scroll')
 	            }
 	        }
 	    })

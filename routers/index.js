@@ -23,7 +23,7 @@ router.get("/",function(req,res){
       sort:{
         createDate:-1
       },
-      limit:pageSize,
+      limit:+pageSize,
       skip:pageIndex*pageSize
     }).populate(["author"]).exec(function(err,docs){  //ArticleModel.find({}).limit(5).sort("-createDate")
           docs.forEach(function(doc){
@@ -39,23 +39,27 @@ router.get("/",function(req,res){
      });
 });
 
+//不知道为什么，下面的docs又是不可写的，只能读，原来是猜测类型中的对象不能写
 router.post('/scrollLoad',function(req,res){
   var pageSize=req.body.pageSize||config.pageSize
   var pageIndex=req.body.pageIndex||config.pageIndex
+  console.log(pageSize,pageIndex)
             //查询条件  需要查询的字段
     ArticleModel.find({},null,{
       sort:{
         createDate:-1
       },
-      limit:pageSize,
-      skip:pageIndex*pageSize
+      limit:+pageSize,
+      skip:+(pageIndex*pageSize)
     }).populate(["author"]).exec(function(err,docs){  //ArticleModel.find({}).limit(5).sort("-createDate")
+          docs=JSON.stringify(docs)
+          docs=JSON.parse(docs)
           docs.forEach(function(doc){
             doc.commentNum=doc.comments.length;
             doc.img=doc.author.img;
             doc.articleHref="/articles/"+doc._id;
             doc.authorHref="/authors/"+doc.author._id;
-            doc.createFormateDate=util.formateDate(doc.createDate);
+            doc.createFormateDate=util.formateDate(new Date(doc.createDate));
             doc.content=util.convert(doc.content)
             doc.shortContent=util.ellipsis(doc.content)
           });
