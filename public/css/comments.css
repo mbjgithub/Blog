@@ -9,7 +9,7 @@
 	width: 0px;
     clear: both;
 }
-.article-right-comment-header textarea{
+.article-right-comment-header .commentText{
 	width:100%;
 	height: 100px;
 	resize: none;
@@ -17,7 +17,7 @@
 	box-sizing: border-box;
 	outline: none;
 }
-.article-right-comment-header a{
+.article-right-comment-header .commentBtn{
 	width: 60px;
 	height: 30px;
 	background: orange;
@@ -29,6 +29,8 @@
 	display: inline-block;
 	line-height: 30px;
 	float: right;
+	margin:0;
+	padding: 0;
 }
 .article-right-comment-content{
 	width: 100%;
@@ -48,9 +50,9 @@
 	vertical-align: top;
 }
 .comment-left img{
-    width: 100px;
-	height: 100px;
-	border-radius: 50px;
+    width: 40px;
+	height: 40px;
+	border-radius: 20px;
 }
 .comment-right{
 	display: inline-block;
@@ -98,7 +100,7 @@ em{
 	background: url('/images/spritestx.png') -99px 0px no-repeat
 }
 .cm-oppose:hover{
-	background-position: -443px -22px;
+	background-position: -99px -22px;
 }
 .cm-replayNum{
 	background: url('/images/spritestx.png') -443px -123px no-repeat;

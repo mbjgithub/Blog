@@ -153,6 +153,13 @@ function ellipsis(content){
     return res.slice(0,WORD_NUMBER)+"..."
 }
 
+function by(attr){
+    return function(a,b){
+       var timeA=new Date(a[attr]).getTime()
+       var timeB=new Date(b[attr]).getTime()
+       return timeB-timeA
+    }
+}
 
 module.exports={
 formateDate:formateDate,
@@ -164,5 +171,6 @@ tagsSort:tagsSort,
 tagsShow:tagsShow,
 dealMultipartFormData:dealMultipartFormData,
 ellipsis:ellipsis,
-convert:convert
+convert:convert,
+by:by
 }

@@ -167,8 +167,8 @@
  <div class="article-right-comment article-right-common">
   <!--这里是评论模块，暂时不做，先把文章显示好了在做评论模块-->
   <div class="article-right-comment-header">
-   <textarea class="commentText"></textarea>
-   <a class="commentBtn">评论</a>
+   <textarea class="commentText" id="commentTextId"></textarea>
+   <a href="javascript:void(0)" class="commentBtn">评论</a>
   </div>
   <div class="article-right-comment-content" style="display:none">
   <ul class="article-right-comment-ul">
@@ -193,13 +193,14 @@
    </div>
    
    <div class="cm-third">
-    <a href="" class="cm-praise" >
+    <a href="javascript:void(0)" class="cm-praise" >
      (<em>{%= praiseNum %}</em>)
     </a>
-    <a href="" class="cm-oppose">
+    <a href="javascript:void(0)" class="cm-oppose">
      (<em>{%= opposeNum %}</em>)
     </a>
-    <a href="" class="cm-replayNum">
+    <a href="#commentTextId" class="cm-replayNum" data-parentId="{%= _id %}" 
+    data-authorId="{%= author_id %}" >
      回复({%= replied.length %})
     </a>
    </div>

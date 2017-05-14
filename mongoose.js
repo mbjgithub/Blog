@@ -6,6 +6,7 @@ function connectToMongoDB(){
         console.log("connect to mongodb success");
     });
     connect.on("error",function(err){
+    	console.log("error",err)
     	console.log("connect to mongodb error");
     });
 }

@@ -13,7 +13,7 @@ var CommentSchema=new Schema({
 	reply_id:[],
 	date:{
 		type:Date,
-		default:new Date()
+		default:Date.now()
 	}
 });
 
@@ -54,11 +54,7 @@ var ArticleSchema=new Schema({
 
 ArticleSchema.pre("save",function(next){
    //do something before save
-   if(this.isOld){
-   	 this.fixDate=Date.now;
-   }else{
    	 this.createDate=this.fixDate=Date.now();
-   }
    this.praiseNum=this.praiseNum?this.praiseNum:0;
    this.opposeNum=this.opposeNum?this.opposeNum:0;
    this.visitedNum=this.visitedNum?this.visitedNum:0;

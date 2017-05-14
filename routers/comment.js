@@ -1,6 +1,6 @@
 var express=require('express')
 var ArticleModel=require('../models/article')
-
+var utils=require('../methods/public')
 var app=express.Router()
 
 app.post('/comments',function(req,res){
@@ -17,7 +17,7 @@ app.post('/comments',function(req,res){
             comments=JSON.parse(comments)
          	formateComments(comments)
 
-            console.log(comments)        //这里也好奇怪，明明是对象，我在formateComments里面添加了属性，结果没有添加
+            //console.log(comments)        //这里也好奇怪，明明是对象，我在formateComments里面添加了属性，结果没有添加
          	res.json({comments:comments})
          }
    })
@@ -41,27 +41,53 @@ app.post('/saveComments',function(req,res){
     		res.json({errMsg:"查询文章失败",errCode:-2})
     	    return 
     	}
-        var comments=article.comments||[]
-        comments.push({
-        	content:body.content,
-        	author_id:user._id,
-	    	author_img:user.img,
-	    	author_username:user.username,
-        	praiseNum:0,
-        	opposeNum:0,
-	    	reply_id:[],
-        })
-        if(body.parent_id){   //如果有父id，表明是回复者别人的帖子
-            comments.forEach(function(comment){
-                if(comment.author_id===body.parent_id){
-                	comment.replied_id=comment.replied_id||[]
-                	comment.replied_id.push(user._id)
-                }
-            })
+      if(body.author_id===user._id){
+          res.json({errMsg:"不能自己回复自己",errCode:-4})
+          return 
         }
-        ArticleModel.update({_id:body._id},{comments:comments},function(err){
-             err?res.json({errMsg:"保存评论失败",errCode:-3}):
-                  res.json({success:"保存成功",errCode:0})
+        var comments=article.comments||[]
+        
+        var comm={
+            content:body.content,
+            author_id:user._id,
+            author_img:user.img,
+            author_username:user.username,
+            praiseNum:0,
+            opposeNum:0,
+            reply_id:[],
+            date:Date.now()
+        }
+        console.log(comments.length)
+        comments.push(comm)
+        console.log(comments.length)
+        ArticleModel.findByIdAndUpdate(body._id,{$set:{comments:comments}},{new:true},function(err,article){
+             if(err){
+              res.json({errMsg:"保存评论失败",errCode:-3})
+            }else{
+               var comments=article.comments
+               comments=JSON.stringify(comments)
+               comments=JSON.parse(comments)
+               var comment
+               comments.sort(utils.by("date"))
+               var target=comments[0]
+               if(body.parent_id){   //如果有父id，表明是回复者别人的帖子
+                 for(var i=0,len=comments.length;i<len;i++){
+                  comment=comments[i]
+                  console.log(comment._id+" "+body.parent_id)
+                  if(comment._id===body.parent_id){
+                  comment.reply_id=comment.reply_id||[]
+                  comment.reply_id.push(target._id)
+                  break
+                  }
+                 }
+               }
+               console.log(comments)
+               ArticleModel.update({_id:body._id},{$set:{comments:comments}},function(){
+                  err?res.json({errMsg:"保存评论失败",errCode:-3}):
+                    res.json({comment:formateComments([target]),errCode:0})
+               })
+            }
+                 
         })
     })
 })
@@ -94,10 +120,11 @@ function formateComments(comments){
 			i--
 		}
 	}
+  return comments
 }
 
 function formateDate(item){
-	var time=new Date().getTime()-item.date
+	var time=new Date().getTime()-new Date(item.date).getTime()
 	var formateDate;
 	time=time/1000
 	if(time<60){
@@ -116,33 +143,33 @@ function formateDate(item){
 	item.formateDate=formateDate
 }
 
-var test=[
-   {
-   	_id:1,
-   	reply_id:[3,5],
-   	author_username:"mbj"
-   },
-   {
-   	_id:2,
-   	reply_id:[],
-   	author_username:'wmy'
-   },
-   {
-   	_id:3,
-   	reply_id:[4],
-   	author_username:'mgs'
-   },
-   {
-   	_id:4,
-    reply_id:[5],
-    author_username:"hcx"
-   },
-   {
-   	_id:5,
-   	reply_id:[],
-   	author_username:'mfj'
-   }
-]
+// var test=[
+//    {
+//    	_id:1,
+//    	reply_id:[3,5],
+//    	author_username:"mbj"
+//    },
+//    {
+//    	_id:2,
+//    	reply_id:[],
+//    	author_username:'wmy'
+//    },
+//    {
+//    	_id:3,
+//    	reply_id:[4],
+//    	author_username:'mgs'
+//    },
+//    {
+//    	_id:4,
+//     reply_id:[5],
+//     author_username:"hcx"
+//    },
+//    {
+//    	_id:5,
+//    	reply_id:[],
+//    	author_username:'mfj'
+//    }
+// ]
 
 
 

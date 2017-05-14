@@ -4,11 +4,12 @@
 var commentTpl
 var _id
 var compileReg=/{%\s*=\s*(?:(?:['"])([^{}]*)(?:['"])\+)*([\w-\.]+)\s*%}/gm
-
+var margin=40
 
 function parse(comments,parent){
 	comments.forEach(function(comment){
          	var currParent=render(comment,parent)     //评论渲染
+            $(currParent).css('marginLeft',margin)
             parse(comment.replied,currParent)
 	})
 }
@@ -34,9 +35,13 @@ function compile(tpl,data){
 
 $(function(){
     setTimeout(function(){
-
-    _id=location.href.slice(location.href.lastIndexOf('/')+1)||""
-    console.log(_id)
+    var start=location.href.lastIndexOf('/')+1
+    var anchor=location.href.indexOf("#",start)
+    if(~anchor){
+        _id=location.href.slice(start,anchor)||""
+    }else{
+        _id=location.href.slice(start)||""
+    }
     var parent=$('.article-right-comment-content')
     var sonUl=parent.find('.article-right-comment-ul').first()
     commentTpl=sonUl.html()
@@ -54,41 +59,46 @@ $(function(){
                 parent.text(data.tips)
             }else{
                 parse(data.comments,sonUl)
-                parent.css('display',"block")
             }
+            parent.css('display',"block")
         }
     })
     },100)
-    $('.commentBtn').click(function(e){
+    $('.article-right-comment').on("click",".commentBtn",function(e){
         saveComment.call(this,e)
     })
-
-    function saveComment(e,isReply){
-        var content=$('.commentText').val()
+    $('.article-right-comment').on("click",'.cm-replayNum',function(e){
+        var commentModule=$('.article-right-comment-header').first().clone()
+        $(this).parent().parent().append(commentModule)
+    })
+    
+    function saveComment(e){
+        var that=$(this)
+        var isReply=true
+        if(that.parent().parent().hasClass("article-right-comment")){
+             isReply=false
+        }
+        var commentText=that.prev()
+        var content=commentText.val()
+        commentText.focus()
+        if($('.top-nav-center-profile-mainpage').length<=0){
+            location.href="http://127.0.0.1:1337/loginorregister/login"
+            //?path=/articles/"+_id
+            return
+        }
         if(content.length<=0){
             alert("评论不能为空")
             return
         }
-        if($('.top-nav-center-profile-mainpage').length<=0){
-            location.href="http://127.0.0.1:1337/loginorregister/login?path=/articles/"+_id
-            return
-        }
-        // var userinfo=($('.top-nav-center-profile-mainpage').data('userinfo')||"").split(',')
-        // if(userinfo.length<=0){
-        //     location.href="http://127.0.0.1:1337/loginorregister/login?path=/articles/"+_id
-        //     return
-        // }
-        // if(!(userinfo[0]&&userinfo[1]&&userinfo[2])){
-        //     alert('获取用户信息失败，请重试')
-        //     return
-        // }
         var data={
                 content:content,
                 _id:_id
             }
-        // if(isReply){
-        //     data.parent_id=$('')
-        // }
+        if(isReply){
+            var temp=that.parent().prev().find('.cm-replayNum')
+            data.parent_id=temp.attr("data-parentId")
+            data.author_id=temp.attr("data-authorId")
+        }
         $.ajax({
             method:'POST',
             url:"/saveComments",
@@ -97,12 +107,17 @@ $(function(){
                  if(data.errCode<0){
                     alert(data.errMsg)
                  }else{
-                    // if(isReply){
-                    //     //如果是回复的话，要在该回复下，做一个评论，当前最有效的方法就是，reload
-                    // }
-                    location.reload()
+                    var parent
+                    if(isReply){
+                        parent=that.parent().parent().next()
+                        that.parent().remove()
+                    }else{
+                        parent=$('.article-right-comment-ul').first()
+                    }
+                    parse(data.comment,parent)
                  }
             }
         })
     }
+
 })
